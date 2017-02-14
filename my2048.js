@@ -3,7 +3,7 @@ var game=(function(){
 var mat=[[0,0,0,0],[0,0,0,0],[0,0,0,0],[0,0,0,0]];
 var mat1=[[0,0,0,0],[0,0,0,0],[0,0,0,0],[0,0,0,0]];
 var prev_mat=[[0,0,0,0],[0,0,0,0],[0,0,0,0],[0,0,0,0]];
-var score,el,flag_undo,flag_speech;
+var score,el,flag_undo;
 
 	
 	function redraw(){
@@ -262,10 +262,9 @@ var score,el,flag_undo,flag_speech;
 
 	
 		if(e.keyCode===40){
-				
+
 			moveDown();
 		}
-        
 		redraw();
 		if(isGameOver()){
 				console.log("game over");
@@ -295,103 +294,35 @@ var score,el,flag_undo,flag_speech;
 
 
 		document.getElementById("over").style.height="0%";		
-
+			
+		if(localStorage.matrix&&!isGameOver()){
+			 mat=JSON.parse(localStorage.matrix);
+			
+		}
+		else{
 			mat=[[0,0,0,0],[0,0,0,0],[0,0,0,0],[0,0,0,0]];
 			score=0;
 			fillRandomEmptyCell();
 			fillRandomEmptyCell();
 			
 
-	
+		}
 	
 		redraw();
 	}
 	
-   
+	function BeforeUnload(){
 
-    function BeforeUnload(){
-
-	localStorage.setItem("matrix",JSON.stringify(prev_mat));
-	localStorage.setItem("prev_score",JSON.stringify(score));
+		localStorage.setItem("mat",JSON.stringify(prev_mat));
+		
 
 
 	}
-
-
-	function move_speech(){
-		copy_prev_matrix();
-		flag_undo=true;
-
-
-		console.log("knife");
-		if(flag_speech===1){
-			transpose();
-			col_reverse();
-			moveDown();							
-			transpose();
-			row_reverse();
-		}
-		if(flag_speech===2){
-			transpose();
-			row_reverse();
-			transpose();
-			row_reverse();
-			moveDown();				
-			transpose();
-			col_reverse();
-			transpose();
-			col_reverse();
-		}
-		if(flag_speech===3){
-			transpose();
-			row_reverse();
-			moveDown();				
-			transpose();
-			col_reverse();
-		}
-		if(flag_speech===4){
-			moveDown();				
-		}
-		flag_speech=0;
-		redraw();
-
-		if(isGameOver()){
-			document.getElementById('over').style.display="100%";
-		}
-	}
-
-
-
-
-	function checkEmpty(){
-		for(var i=0;i<4;i++){
-			for(var j=0;j<4;j++){
-				if(mat[i][j])return false;
-			}
-		}
-	return true;
-	}
-
-
 	function init(id){
 		
 		flag_undo=false;
-        flag_speech=0;
-	
-    if(JSON.parse(localStorage.prev_score)){
-            mat=JSON.parse(localStorage.matrix);
-            score=JSON.parse(localStorage.prev_score);
-            redraw();
-            console.log(score);
-            console.log(mat);
-    }
-        else{
-        reset();
-        }
-        if(checkEmpty()){
-        	reset();
-        }
-
+		reset();
+		
 
 		var el1=document.getElementById(id);
 		el1.addEventListener("click",reset);
@@ -406,44 +337,9 @@ var score,el,flag_undo,flag_speech;
 		
 		document.body.addEventListener('keydown',move);
 		window.addEventListener("unload",BeforeUnload);
-     if(annyang){
-			var commands = {
-				'left' : function(){
-					flag_speech=1;
-					move_speech();
-			    },
-			    'up' : function(){
-					flag_speech=2;
-					move_speech();
-			    },
-			    'right' : function(){
-					flag_speech=3;
-					move_speech();
-			    },
-			    'down' : function(){
-					flag_speech=4;
-					move_speech();
-			    },
-			    'undo' : function(){
-			    	undo();
-			    },
-			    'new game':function(){
-			    	reset();
-			    }
-
-            };
-			annyang.addCommands(commands);
-			annyang.debug();
-			annyang.start();
-		}
-		else{
-			console.log('error annyang');
-		}
-	}
 
 
-
-
+}
 
 return {
 
@@ -451,4 +347,3 @@ return {
 	};
 
 })();
-
