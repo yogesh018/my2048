@@ -413,25 +413,6 @@ var score,el,flag_undo,flag_speech;
 		
 		document.body.addEventListener('keydown',move);
 		
-        window.addEventListener("swipeleft",function(){
-             
-		copy_prev_matrix();
-		flag_undo=true;
-			console.log("blah");
-			transpose();
-			col_reverse();// rotate 90 degree anti clockwise
-			moveDown();
-			transpose();
-			row_reverse();
-
-		redraw();
-		if(isGameOver()){
-				console.log("game over");
-								
-				document.getElementById("over").style.height="100%";
-	}
-       
-        });
         window.addEventListener("unload",BeforeUnload);
      if(annyang){
 			var commands = {
