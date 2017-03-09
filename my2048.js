@@ -224,7 +224,7 @@ var score,el,flag_undo,flag_speech;
 		copy_prev_matrix();
 		flag_undo=true;
 		console.log("something!")
-		if(e.keyCode&&e.keyCode===37||dir==='l'){
+		if(e.keyCode&&e.keyCode===37){
 			console.log("blah");
 			transpose();
 			col_reverse();// rotate 90 degree anti clockwise
@@ -235,7 +235,7 @@ var score,el,flag_undo,flag_speech;
 
 	
 
-		if(e.keyCode&&e.keyCode===38||dir==='u'){
+		if(e.keyCode&&e.keyCode===38){
 
 				transpose();
 				row_reverse();
@@ -250,7 +250,7 @@ var score,el,flag_undo,flag_speech;
 		}
 	
 
-		if(e.keyCode&&e.keyCode===39||dir==='r'){
+		if(e.keyCode&&e.keyCode===39){
 
 			transpose();
 			row_reverse();
@@ -261,7 +261,7 @@ var score,el,flag_undo,flag_speech;
 		}
 
 	
-		if(e.keyCode&&e.keyCode===40||dir==='d'){
+		if(e.keyCode&&e.keyCode===40){
 				
 			moveDown();
 		}
@@ -375,7 +375,12 @@ var score,el,flag_undo,flag_speech;
 
 	function init(id){
 		
-		detectswipe();
+	
+        
+	
+        
+        
+       
         flag_undo=false;
         flag_speech=0;
 	
@@ -407,7 +412,27 @@ var score,el,flag_undo,flag_speech;
 		});
 		
 		document.body.addEventListener('keydown',move);
-		window.addEventListener("unload",BeforeUnload);
+		
+        window.addEventListener("swipeleft",function(){
+             
+		copy_prev_matrix();
+		flag_undo=true;
+			console.log("blah");
+			transpose();
+			col_reverse();// rotate 90 degree anti clockwise
+			moveDown();
+			transpose();
+			row_reverse();
+
+		redraw();
+		if(isGameOver()){
+				console.log("game over");
+								
+				document.getElementById("over").style.height="100%";
+	}
+       
+        });
+        window.addEventListener("unload",BeforeUnload);
      if(annyang){
 			var commands = {
 				'left' : function(){
