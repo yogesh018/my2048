@@ -379,6 +379,25 @@ var score,el,flag_undo,flag_speech;
         
 	
         
+        $(document).on("swipeleft",function(){
+             
+		copy_prev_matrix();
+		flag_undo=true;
+			console.log("blah");
+			transpose();
+			col_reverse();// rotate 90 degree anti clockwise
+			moveDown();
+			transpose();
+			row_reverse();
+
+		redraw();
+		if(isGameOver()){
+				console.log("game over");
+								
+				document.getElementById("over").style.height="100%";
+	}
+       
+        });
         
        
         flag_undo=false;
