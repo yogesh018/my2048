@@ -39,6 +39,7 @@ function detectswipe() {
         }
         **/
         dir = "";
+          move();
       },false);  
     }
 

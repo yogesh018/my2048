@@ -224,7 +224,7 @@ var score,el,flag_undo,flag_speech;
 		copy_prev_matrix();
 		flag_undo=true;
 		console.log("something!")
-		if(e.keyCode===37||dir==='l'){
+		if(e.keyCode&&e.keyCode===37||dir==='l'){
 			console.log("blah");
 			transpose();
 			col_reverse();// rotate 90 degree anti clockwise
@@ -235,7 +235,7 @@ var score,el,flag_undo,flag_speech;
 
 	
 
-		if(e.keyCode===38||dir==='u'){
+		if(e.keyCode&&e.keyCode===38||dir==='u'){
 
 				transpose();
 				row_reverse();
@@ -250,7 +250,7 @@ var score,el,flag_undo,flag_speech;
 		}
 	
 
-		if(e.keyCode===39||dir==='r'){
+		if(e.keyCode&&e.keyCode===39||dir==='r'){
 
 			transpose();
 			row_reverse();
@@ -261,7 +261,7 @@ var score,el,flag_undo,flag_speech;
 		}
 
 	
-		if(e.keyCode===40||dir==='d'){
+		if(e.keyCode&&e.keyCode===40||dir==='d'){
 				
 			moveDown();
 		}
