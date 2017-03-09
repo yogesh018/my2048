@@ -375,7 +375,7 @@ var score,el,flag_undo,flag_speech;
 
 	function init(id){
 		
-		swipeDirection.init();
+		detectswipe();
         flag_undo=false;
         flag_speech=0;
 	
